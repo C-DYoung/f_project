@@ -1,19 +1,20 @@
 import { Route, Routes } from 'react-router-dom'
-import FnaBoardList from './component/FnaBoardList'
-import FnaBoardDetail from './component/FnaBoardDetail'
-import FnaBoardUpdate from './component/FnaBoardUpdate'
-import FnaBoardInsert from './component/FnaBoardInsert,'
+import FaqBoardDetail from './component/FaqBoardDetail'
+import FaqBoardInsert from './component/FaqBoardInsert'
+import FaqBoardList from './component/FaqBoardList'
+import FaqBoardUpdate from './component/FaqBoardUpdate'
+
 
 const BoardMain = () => {
     return (
         <div>
-            <h2>test - Board Main</h2>
+            {/* <h2>test - Board Main</h2> */}
             <Routes>
-                <Route path='/list' element={<FnaBoardList />} />
+                <Route path='/list' element={<FaqBoardList />} />
                 {/* FnaBoardDetail에서 상세페이지, 삭제까지 */}
-                <Route path='/detail/:id' element={<FnaBoardDetail />} />
-                <Route path='/insert' element={<FnaBoardInsert/>} />
-                <Route path='/update/:id' element={<FnaBoardUpdate/>} />
+                <Route path='/detail/:id' element={<FaqBoardDetail />} />
+                <Route path='/insert' element={<FaqBoardInsert/>} />
+                <Route path='/update/:id' element={<FaqBoardUpdate/>} />
             </Routes>
         </div>
     )

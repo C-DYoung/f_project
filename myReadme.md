@@ -23,3 +23,7 @@ BrowserRouter
  bootstrap icon
  https://velog.io/@saichoiblog/how-to-use-bootstrap-icon
  -> 적용법이 적혀있음
+
+ 권한별 페이지 라우팅
+ https://jeonghwan-kim.github.io/dev/2020/03/20/role-based-react-router.html
+ -> 확인할 것.
