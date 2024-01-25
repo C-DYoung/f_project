@@ -1,22 +1,29 @@
-import { Route, Routes } from 'react-router-dom'
-import FaqBoardDetail from './component/FaqBoardDetail'
-import FaqBoardInsert from './component/FaqBoardInsert'
-import FaqBoardList from './component/FaqBoardList'
-import FaqBoardUpdate from './component/FaqBoardUpdate'
+import { Route, Routes } from "react-router-dom";
+import FaqBoardList from "./component/FaqBoardList";
 
+
+import NoticeBoardDetail from "./component/NoticeBoardDetail";
+import NoticeBoardInsert from "./component/NoticeBoardInsert";
+import NoticeBoardList from "./component/NoticeBoardList";
+import NoticeBoardUpdate from "./component/NoticeBoardUpdate";
 
 const BoardMain = () => {
     return (
         <div>
             {/* <h2>test - Board Main</h2> */}
             <Routes>
-                <Route path='/list' element={<FaqBoardList />} />
-                {/* FnaBoardDetail에서 상세페이지, 삭제까지 */}
-                <Route path='/detail/:id' element={<FaqBoardDetail />} />
-                <Route path='/insert' element={<FaqBoardInsert/>} />
-                <Route path='/update/:id' element={<FaqBoardUpdate/>} />
+                {/* noticeboard */}
+                <Route path="/noticelist/" element={<NoticeBoardList />} />
+                {/* FaqBoardDetail에서 상세페이지, 삭제까지 */}
+                <Route path="/noticedetail/:id" element={<NoticeBoardDetail />} />
+                <Route path="/noticeinsert" element={<NoticeBoardInsert />} />
+                <Route path="/noticeupdate/:id" element={<NoticeBoardUpdate />} />
+                
+                {/* faqboard */}
+                <Route path="/faqlist" element={<FaqBoardList />} />
+                {/* FaqBoardDetail에서 상세페이지, 삭제까지 */}
             </Routes>
         </div>
-    )
-}
-export default BoardMain
+    );
+};
+export default BoardMain;

@@ -2,6 +2,11 @@
  * Font Awesome Free 5.8.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
+ /* 버튼사이의 간격을 추가하는 css  */
+.bnt-space {
+    margin-right: 10px;
+}
+
 .fa,
 .fas,
 .far,

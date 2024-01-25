@@ -60,8 +60,17 @@ const Header = () => {
                                         </div>
                                     </li>
 
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="contact.html">Contact</a>
+                                    {/* Board 부분 */}
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            고객센터
+                                        </a>
+                                        <div className="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                            <a className="dropdown-item" href="/board/noticelist"> 공지사항</a>
+                                            <a className="dropdown-item" href="/board/faqlist">FAQ</a>
+                                            
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -85,7 +94,8 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div className="search_input" id="search_input_box">
+            {/* 임시로 서치박스 지움 */}
+            {/* <div className="search_input" id="search_input_box">
                 <div className="container ">
                     <form className="d-flex justify-content-between search-inner">
                         <input type="text" className="form-control" id="search_input" placeholder="Search Here" />
@@ -93,7 +103,7 @@ const Header = () => {
                             <span className="ti-close" id="close_search" title="Close Search"></span>
                     </form>
                 </div>
-            </div>
+            </div> */}
         </header>
 //   {/* <!-- Header part end--> */ }
     )
