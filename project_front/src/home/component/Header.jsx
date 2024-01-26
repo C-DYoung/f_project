@@ -67,7 +67,7 @@ const Header = () => {
                                             고객센터
                                         </a>
                                         <div className="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                            <a className="dropdown-item" href="/board/noticelist"> 공지사항</a>
+                                            <a className="dropdown-item" href="/board/noticelist/1"> 공지사항</a>
                                             <a className="dropdown-item" href="/board/faqlist">FAQ</a>
                                             
                                         </div>

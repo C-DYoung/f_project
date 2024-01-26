@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './home/component/Header'
 
 import BoardMain from './board/BoardMain'
+import MypageMain from './mypage/MypageMain'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Header/>
       <Routes>
         <Route path='/board/*' element={<BoardMain />} />
+        <Route path='/mypage/*' element={<MypageMain />} />
       </Routes>
       {/* <Footer /> */}
     </div>

@@ -9,49 +9,6 @@ CREATE TABLE IF NOT EXISTS users ( -- 유저 보드
     PRIMARY KEY (email) -- 인식방법
 );
 
-CREATE TABLE IF NOT EXISTS product ( -- 상품 보드
-    product_id INT NOT NULL AUTO_INCREMENT, -- 글 번호 자동 생성(PK)
-    title VARCHAR(100) NOT NULL, -- 제목
-    email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key)
-    picture VARCHAR(2048) NULL, -- 사진
-    master_price INT NOT NULL, -- 즉시 구매가
-    auction_id INT NULL, -- 낙찰 아이디
-    endtime DATETIME NOT NULL, -- 경매 종료시간
-	auction_status CHAR(1) NOT NULL, -- 경매 상태 추후 입력 임시값
-    isbn VARCHAR(100) NULL, -- 국제책번호
-    content VARCHAR(4096) NOT NULL, -- 내용
-    cnt INT NULL DEFAULT 0, -- 조회수
-	createAt DATETIME NULL DEFAULT now(), -- 작성시간
-    PRIMARY KEY (product_id), -- 인식 방법
-    FOREIGN KEY (email) REFERENCES users(email) -- FK
-);
-
--- SELECT product_id, title, auction_price from product left join acution on product.id = auction.id; 
-
-CREATE TABLE IF NOT EXISTS auction ( -- 입찰 보드
-	auction_id INT NOT NULL AUTO_INCREMENT, -- 글번호
-    product_id INT NOT NULL, -- 상품 ID
-    email VARCHAR(50) NOT NULL, -- 입찰자 이메일
-    auction_price INT NOT NULL, -- 입찰가
-    picture VARCHAR(2048) NULL, -- 사진
-    product_status CHAR(1) NOT NULL, -- 책 상태 추후 정의 필요 (ex: a = 상태 좋음, f = 상태 나쁨) 임시값
-    createAt DATETIME NULL DEFAULT now(), -- 입찰시간
-    PRIMARY KEY (auction_id), -- 인식 방법
-    FOREIGN KEY (email) REFERENCES users(email), -- FK
-    FOREIGN KEY (product_id) REFERENCES product(product_id) -- FK 
-);
-
-CREATE TABLE IF NOT EXISTS q_board ( -- 구매자가 입찰자에게 질문 보드
-    q_id INT NOT NULL AUTO_INCREMENT, -- 글 번호 자동 생성(PK)
-    auction_id INT NOT NULL, -- 입찰글 ID (FK)
-    email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key)
-    content VARCHAR(1024) NOT NULL, -- 내용
-    createAt DATETIME NULL DEFAULT now(), -- 작성시간
-    PRIMARY KEY (q_id), -- 인식방법
-    FOREIGN KEY (email) REFERENCES users(email),
-    FOREIGN KEY (auction_id) REFERENCES auction(auction_id)
-);
-
 CREATE TABLE IF NOT EXISTS faqboard ( -- 자주묻는 질문 (고객센터)
     faq_id INT NOT NULL AUTO_INCREMENT, -- 글 번호 자동 생성(PK)
     title VARCHAR(100) NOT NULL, -- 글 제목
@@ -64,13 +21,13 @@ CREATE TABLE IF NOT EXISTS faqboard ( -- 자주묻는 질문 (고객센터)
 
 CREATE TABLE IF NOT EXISTS notice_board ( -- 고객센터 
     notice_id INT NOT NULL AUTO_INCREMENT, -- 글 번호 자동 생성(PK)
-    -- email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key)
+    email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key)
     title VARCHAR(100) NOT NULL, -- 글 제목
     content VARCHAR(1024) NOT NULL, -- 내용
     cnt INT NULL DEFAULT 0, -- 조회수 
     createAt DATETIME NULL DEFAULT now(), -- 작성시간
-    PRIMARY KEY (notice_id) -- 인식방법
-    -- FOREIGN KEY (email) REFERENCES users(email)
+    PRIMARY KEY (notice_id), -- 인식방법
+    FOREIGN KEY (email) REFERENCES users(email) 
 );
 
 -- CREATE TABLE IF NOT EXISTS category (
@@ -79,53 +36,49 @@ CREATE TABLE IF NOT EXISTS notice_board ( -- 고객센터
 --     PRIMARY KEY (tag) -- 인식방법
 -- );
 
-
-INSERT INTO faqboard (title, content) VALUE ('fqa 1번째', '첫번째 faq 게시글 입니다...');
-INSERT INTO faqboard (title, content) VALUE ('fqa 2번째', '두번째 faq 게시글 입니다...');
-INSERT INTO faqboard (title, content) VALUE ('fqa 3번째', '세번째 faq 게시글 입니다...');
-INSERT INTO faqboard (title, content) VALUE ('fqa 4번째', '네번째 faq 게시글 입니다...');
-
-SELECT * FROM faqboard;
-
-
-INSERT INTO notice_board (title, content) VALUE ('notice 1번째', '첫번째 notice 게시글 입니다...');
-INSERT INTO notice_board (title, content) VALUE ('notice 2번째', '두번째 notice 게시글 입니다...');
-INSERT INTO notice_board (title, content) VALUE ('notice 3번째', '세번째 notice 게시글 입니다...');
-INSERT INTO notice_board (title, content) VALUE ('notice 4번째', '네번째 notice 게시글 입니다...');
+SELECT * FROM users;
 
 SELECT * FROM notice_board;
 
 drop table notice_board;
+drop table users;
 
-SELECT * FROM notice_board WHERE notice_id = 3;
+
+INSERT INTO users (email, user_name, pwd, address, phone) VALUE ('user1@com', 'user1', '1234', '서울', '0101111111');
+INSERT INTO users (email, user_name, pwd, address, phone) VALUE ('user2@com', 'user2', '1234', '서울', '01011111111');
+INSERT INTO users (email, user_name, pwd, address, phone, isadmin) VALUE ('admin@com', 'admin', '1234', '서울', '01011111111', 'Y');
 
 
-INSERT INTO notice_board (title, content) VALUE ('test5', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test6', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test7', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test8', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test9', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test10', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test11', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test12', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test13', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test14', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test15', 'test8');
-INSERT INTO notice_board (title, content) VALUE ('test16', 'test16');
-INSERT INTO notice_board (title, content) VALUE ('test17', 'test17');
-INSERT INTO notice_board (title, content) VALUE ('test18', 'test18');
-INSERT INTO notice_board (title, content) VALUE ('test19', 'tes198');
-INSERT INTO notice_board (title, content) VALUE ('test20', 'test20');
-INSERT INTO notice_board (title, content) VALUE ('test21', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test22', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test23', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test24', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test25', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test26', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test27', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test28', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test29', 'test21');
-INSERT INTO notice_board (title, content) VALUE ('test30', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'notice 1번째', '첫번째 notice 게시글 입니다...');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'notice 2번째', '두번째 notice 게시글 입니다...');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'notice 3번째', '세번째 notice 게시글 입니다...');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'notice 4번째', '네번째 notice 게시글 입니다...');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test5', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test6', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test7', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test8', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test9', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test10', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test11', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test12', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test13', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test14', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test15', 'test8');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test16', 'test16');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test17', 'test17');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test18', 'test18');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test19', 'tes198');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test20', 'test20');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test21', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test22', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test23', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test24', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test25', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test26', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test27', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test28', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test29', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test30', 'test21');
 
-SELECT * from notice_board limit 1,7;
+SELECT * from notice_board ORDER BY notice_id DESC limit 0,7;
 SELECT * from notice_board limit 7,7;
