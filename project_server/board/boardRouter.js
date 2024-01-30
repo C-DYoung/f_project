@@ -4,24 +4,30 @@ const boardDAO = require('./boardDAO')
 
 
 // pagination
-router.get('/noticeBoardList/1', function (req, res, next) {
+
+router.get('/noticeBoardList', function (req, res, next) {
     console.log('notice Board List play - pagination1... router')
-    boardDAO.pagination1((resp) => {
+    let data = {
+        page :req.query.page ? Number(req.query.page) : 0,
+    }
+    console.log('router')
+    console.log(data, ' - router', data.page);
+    boardDAO.pagination1(data,(resp) => {
         res.json(resp)
     })
 })
-router.get('/noticeBoardList/2', function (req, res, next) {
-    console.log('notice Board List play - pagination2... router')
-    boardDAO.pagination2((resp) => {
-        res.json(resp)
-    })
-})
-router.get('/noticeBoardList/3', function (req, res, next) {
-    console.log('notice Board List play - pagination3... router')
-    boardDAO.pagination3((resp) => {
-        res.json(resp)
-    })
-})
+// router.get('/noticeBoardList/2', function (req, res, next) {
+//     console.log('notice Board List play - pagination2... router')
+//     boardDAO.pagination2((resp) => {
+//         res.json(resp)
+//     })
+// })
+// router.get('/noticeBoardList/3', function (req, res, next) {
+//     console.log('notice Board List play - pagination3... router')
+//     boardDAO.pagination3((resp) => {
+//         res.json(resp)
+//     })
+// })
 
 // 유저의 요청이 들어오면 실행 -> 페이지를 읽는 것만 하기 때문에 get방식
 // 공지 or FAQ board의 리스트를 펼쳐 줌

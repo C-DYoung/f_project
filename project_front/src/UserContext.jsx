@@ -11,7 +11,7 @@ export const UserProvider = (props) => {
     const [userData, setUserData] = useState({email:'', user_name:'', isadmin:''}) 
 
     useEffect(()=>{
-        console.log('페이지 진입')
+        console.log('페이지 진입 - usercontext')
         const sessionEmail = sessionStorage.getItem("email")
         const sessionUserName = sessionStorage.getItem("user_name")
         const sessionUserIsadmin = sessionStorage.getItem("isadmin")

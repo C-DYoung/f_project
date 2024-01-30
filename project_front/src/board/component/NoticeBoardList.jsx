@@ -1,22 +1,11 @@
-// 고객센터 부분에서 목록 내용을 표시하는 페이지.
-// icon 적용 시키기
-
 import axios from "axios";
 import React, { useCallback, useState, useEffect,useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import UserContext from "../../userContext"
+
 
 const NoticeBoardList = () => {
 	const navigate = useNavigate();
-    
-    // 관리자인가 확인
-    // const context = useContext(UserContext)
-    // const userIsadmin = context.state.userData.isadmin
-//     contextAPI의 변수가 const [userData, setUserData] = useState({email:'', user_name:''}) 로 선언되어있기 때문에,
-// userData.email 의 이메일 값을 가지고 (const userIsadmin = context.state.userData.email) axios get 하여
-// 서버쪽에서 sql문으로 해당 유저테이블의 isadmin 컬럼의 값이 N이면 false, Y이면 true를 응답해주고,
-// 프론트에서 응답받은 값이 true이면 관리자, 아니면 일반 사용자. 이렇게 구분하면 되지 않을까 싶습니다.
-    
 
 	const [noticeBoarList, setNoticeBoardList] = useState({
 		status: "",
@@ -24,23 +13,39 @@ const NoticeBoardList = () => {
 		data: [],
 	});
 
+    // pagination을 위한 코드
+    // const [searchParams, setSearchParams] = useSearchParams(); // 1
+    // const offset = searchParams.get('offset') // 2
+    // const limit = searchParams.get('limit'); // 2
 
-//     const [page,setPage] = useState(0);
-//     const [offset,setOffset] = useState(13)
+
+
+    // end
+
+
+
+    // const [page,setPage] = useState(1);
+    // console.log(page)
+    // console.log()
+    
 
 //     const nextPage = () =>{
 // setPage(page +1)
 //     }
 
-/**
+    // const nextPage = () => {
+    //     setPage(page+1);
+    // }
+
+/*
  * 1. limit 0page
  * 2. limit 13 page + 1 * 13 13
  * 3. limit 26
  */
-    let page = 1
+
 
 	const getNoticeBoardList = useCallback(async () => {
-		const resp = await axios.get(`http://localhost:8000/boards/noticeBoardList/?${page}`, noticeBoarList);
+		const resp = await axios.get(`http://localhost:8000/boards/noticeBoardList/`, noticeBoarList);
 		setNoticeBoardList(resp.data);
 	}, []);
 
@@ -62,7 +67,7 @@ const NoticeBoardList = () => {
 								<h2>고객센터</h2>
 							</div>
 							<div>
-								<Link to={"/board/noticelist/1"}>
+								<Link to={"/board/noticelist"}>
 									<p className="text-dark">공지사항</p>
 								</Link>
 								<Link to={"/board/faqlist"}>
@@ -91,6 +96,7 @@ const NoticeBoardList = () => {
 												<tbody className="table-group-divider">
 													{noticeBoarList.data.map((noticeBoardList) => (
 														<tr key={noticeBoardList.notice_id}>
+															{/* <td>{li.faq_id}</td> */}
 															<td>
 																<Link to={"/board/noticedetail/" + noticeBoardList.notice_id}>{noticeBoardList.title}</Link>
 															</td>
@@ -133,12 +139,12 @@ const NoticeBoardList = () => {
 								</a>
 							</li>
 							<li className="page-item">
-								<a className="page-link" href={"1"}>
+								<a className="page-link" href={'1'}>
 									1
 								</a>
 							</li>
 							<li className="page-item">
-								<a className="page-link" href={"2"}>
+								<a className="page-link" href={2}>
 									2
 								</a>
 							</li>

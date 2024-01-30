@@ -79,6 +79,9 @@ INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test27', '
 INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test28', 'test21');
 INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test29', 'test21');
 INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test30', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test31', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test32', 'test21');
+INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test33', 'test21');
 
 SELECT * from notice_board ORDER BY notice_id DESC limit 0,7;
 SELECT * from notice_board limit 7,7;

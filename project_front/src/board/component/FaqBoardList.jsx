@@ -37,7 +37,7 @@ const FaqBoardList = () => {
 							<h2 className="contact-title">FAQ</h2>
 						</div>
 						<div className="col-lg-2">
-							<Link to={"/board/noticelist/1"}>
+							<Link to={"/board/noticelist"}>
 								<p className="text-muted">공지사항</p>
 							</Link>
 							<Link to={"/board/faqlist"}>

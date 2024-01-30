@@ -17,7 +17,7 @@ const sql = {
     faqUpdate: 'UPDATE faqboard SET title = ?, content = ? WHERE faq_id = ?',
 
     // pagination
-    pagination1: 'SELECT * from notice_board ORDER BY notice_id DESC limit 0,13',
+    pagination1: 'SELECT * from notice_board ORDER BY notice_id DESC limit ?,13',
     pagination2: 'SELECT * from notice_board ORDER BY notice_id DESC limit 13,13',
     pagination3: 'SELECT * from notice_board ORDER BY notice_id DESC limit 26,13',
 }
@@ -25,13 +25,15 @@ const sql = {
 const boardDAO = {
 
     // ---------- pagination board 관련 ------------------
-    pagination1: async (callback) => {
+    pagination1: async (item,callback) => {
         let conn = null
         try {
+            console.log('00-dao')
+            console.log(item, 'dao')
             conn = await getPool().getConnection()
-
-            const [resp] = await conn.query(sql.pagination1, [])
-
+            console.log('11dao')
+            const [resp] = await conn.query(sql.pagination1, [item.page])
+            console.log('22dao')
             console.log('noticelist_pagination1_ss')
             callback({ status: 200, message: 'OK', data: resp })
         } catch (error) {

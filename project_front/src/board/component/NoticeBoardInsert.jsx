@@ -39,7 +39,7 @@ const NoticeBoardInsert = () => {
 								<h2>고객센터</h2>
 							</div>
 							<div>
-								<Link to={"/board/noticelist/1"}>
+								<Link to={"/board/noticelist"}>
 									<p className="text-dark">공지사항</p>
 								</Link>
 								<Link to={"/board/faqlist"}>
@@ -80,7 +80,7 @@ const NoticeBoardInsert = () => {
 											<div className="container">
 												<div className="col-auto"></div>
                                                 <button type="button" className="btn btn-primary btn-sm float-right bnt-space" onClick={noticeInsert}>저장</button>
-                                                <button type="button" className="btn btn-danger btn-sm float-right bnt-space" onClick={()=>navigate('/board/noticelist/1')} >취소</button>
+                                                <button type="button" className="btn btn-danger btn-sm float-right bnt-space" onClick={()=>navigate('/board/noticelist/')} >취소</button>
 												
 											</div>
 										</div>
