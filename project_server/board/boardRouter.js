@@ -5,6 +5,18 @@ const boardDAO = require('./boardDAO')
 
 // pagination
 
+// pagination
+// router.get('/noticeBoardList', function (req, res, next) {
+//     console.log('notice Board List play - pagination1... router')
+//     console.log(req.query.page);
+//     let data = {
+//         limit :req.query.page ? Number(req.query.page) : 0,
+//     }
+//     boardDAO.pagination1(data,(resp) => {
+//         res.json(resp)
+//     })
+// })
+
 router.get('/noticeBoardList', function (req, res, next) {
     console.log('notice Board List play - pagination1... router')
     let data = {

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS faqboard ( -- 자주묻는 질문 (고객센터)
 
 CREATE TABLE IF NOT EXISTS notice_board ( -- 고객센터 
     notice_id INT NOT NULL AUTO_INCREMENT, -- 글 번호 자동 생성(PK)
-    email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key)
+    email VARCHAR(50) NOT NULL,  -- 사용자 아이디(Foreign Key) 
     title VARCHAR(100) NOT NULL, -- 글 제목
     content VARCHAR(1024) NOT NULL, -- 내용
     cnt INT NULL DEFAULT 0, -- 조회수 
@@ -85,3 +85,8 @@ INSERT INTO notice_board (email, title, content) VALUE ('admin@com', 'test33', '
 
 SELECT * from notice_board ORDER BY notice_id DESC limit 0,7;
 SELECT * from notice_board limit 7,7;
+
+SELECT * from users where email = 'admin1@com';
+
+UPDATE users SET isadmin='Y' WHERE email='admin1@com';
+
