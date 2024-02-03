@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import FaqBoardList from "./component/FaqBoardList";
 
+import './board.css'
+
 
 import NoticeBoardDetail from "./component/NoticeBoardDetail";
 import NoticeBoardInsert from "./component/NoticeBoardInsert";
@@ -18,9 +20,9 @@ const BoardMain = () => {
             <Routes>
                 {/* noticeboard */}
                 <Route path="/noticelist" element={<NoticeBoardList />} />
-                {/* <Route path="/noticelist/1" element={<NoticeBoardList1 />} /> */}
-                {/* <Route path="/noticelist/2" element={<NoticeBoardList2 />} /> */}
-                {/* <Route path="/noticelist/3" element={<NoticeBoardList3 />} /> */}
+                <Route path="/noticelist/1" element={<NoticeBoardList1 />} />
+                <Route path="/noticelist/2" element={<NoticeBoardList2 />} />
+                <Route path="/noticelist/3" element={<NoticeBoardList3 />} />
                 
                 {/* FaqBoardDetail에서 상세페이지, 삭제까지 */}
                 <Route path="/noticedetail/:id" element={<NoticeBoardDetail />} />

@@ -3,37 +3,34 @@ const getPool = require('../common/pool')
 //이곳에 필요한 sql 등록.. 
 const sql = {
     // 고객센터 - 공지에 관련된 sql
-    noticeBoardList: 'SELECT * FROM notice_board ORDER BY notice_id DESC',
-    noticeInsert: 'INSERT INTO notice_board (title, content) VALUES (?,?)',
+    // noticeBoardList: 'SELECT * FROM notice_board ORDER BY notice_id DESC',
+    noticeInsert: 'INSERT INTO notice_board (title, content, email) VALUES (?,?,?)',
     noticeBoard: 'SELECT * FROM notice_board WHERE notice_id = ?',
     noticeDelete: 'DELETE FROM notice_board WHERE notice_id = ?',
     noticeUpdate: 'UPDATE notice_board SET title = ?, content = ? WHERE notice_id = ?',
 
     // 고객센터 - FAQ에 관련된 sql 
     faqBoardList: 'SELECT * FROM faqboard',
-    faqInsert: 'INSERT INTO faqboard (title, content) VALUES (?,?)',
-    faqBoard: 'SELECT * FROM faqboard WHERE faq_id = ?',
-    faqDelete: 'DELETE FROM faqboard WHERE faq_id = ?',
-    faqUpdate: 'UPDATE faqboard SET title = ?, content = ? WHERE faq_id = ?',
 
     // pagination
-    pagination1: 'SELECT * from notice_board ORDER BY notice_id DESC limit ?,13',
+    pagination1: 'SELECT * from notice_board ORDER BY notice_id DESC limit 0,13',
     pagination2: 'SELECT * from notice_board ORDER BY notice_id DESC limit 13,13',
-    pagination3: 'SELECT * from notice_board ORDER BY notice_id DESC limit 26,13',
+    pagination3: 'SELECT * from notice_board ORDER BY notice_id DESC limit 26,13'
 }
 
 const boardDAO = {
 
     // ---------- pagination board 관련 ------------------
-    pagination1: async (item,callback) => {
+    pagination1: async (callback) => {
         let conn = null
         try {
-            console.log('00-dao')
-            console.log(item, 'dao')
+            console.log('dao-00p')
             conn = await getPool().getConnection()
-            console.log('11dao')
-            const [resp] = await conn.query(sql.pagination1, [item.page])
-            console.log('22dao')
+
+            console.log('dao-11p')
+            const [resp] = await conn.query(sql.pagination1, [])
+
+            console.log('dao-22p')
             console.log('noticelist_pagination1_ss')
             callback({ status: 200, message: 'OK', data: resp })
         } catch (error) {
@@ -74,28 +71,14 @@ const boardDAO = {
     },
 
     // ---------- notice board 관련 ------------------
-    //게시물 조회 요청이 들어왔을 때 router 에 의해 실행.. dbms
-    noticeBoardList: async (callback) => {
-        let conn = null
-        try {
-            conn = await getPool().getConnection()
-
-            const [resp] = await conn.query(sql.noticeBoardList, [])
-
-            console.log('noticelist_ss')
-            callback({ status: 200, message: 'OK', data: resp })
-        } catch (error) {
-            return { status: 500, message: '공지 목록 조회 실패', error: error }
-        } finally {
-            if (conn !== null) conn.release()
-        }
-    },
     noticeInsert: async (item, callback) => {
         let conn = null
         try {
             conn = await getPool().getConnection()
 
-            const [resp] = await conn.query(sql.noticeInsert, [item.title, item.content])
+            const [resp] = await conn.query(sql.noticeInsert, [item.title, item.content, item.email])
+            
+            console.log(resp, item)
 
             console.log('noticeinsert_ss')
             callback({ status: 200, message: 'OK', data: resp })
@@ -114,7 +97,7 @@ const boardDAO = {
             const [resp] = await conn.query(sql.noticeBoard, item)
 
             console.log('noticedetail_ss')
-            // console.log(item)
+            console.log(item)
             callback({ status: 200, message: 'OK', data: resp[0] })
         } catch (error) {
             console.log(error)

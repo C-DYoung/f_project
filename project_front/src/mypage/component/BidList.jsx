@@ -10,17 +10,17 @@ const BidList = () => {
 
     // 회원정보 get
     const userEmail = context.state.userData.email
-    const imgUrl = 'http://localhost:8000/static/'
+    const imgUrl = 'http://localhost:8000/static/upload/'
 
 
     // 구매등록 상품 상태
     const [data, setData] = useState([{}])
     // 구매등록 상품정보 get
     const showInfo = useCallback(async ()=>{
-        const resp = await axios.get('http://localhost:8000/product/' + userEmail)
+        const resp = await axios.get('http://localhost:8000/products/' + userEmail)
         if(resp.data.status === 500) window.alert(resp.data.message)
         else {
-            console.log('구매등록상품', resp.data.data)
+            // console.log('구매등록상품', resp.data.data)
             const result = resp.data.data.map((item) => {
                 let auctionArr = []
                 if (item.auction_info) {
@@ -40,7 +40,7 @@ const BidList = () => {
         const resp = await axios.get('http://localhost:8000/auction/' + userEmail)
         if(resp.data.status === 500) window.alert(resp.data.message)
         else {
-            console.log('나의 입찰정보', resp.data.data)
+            // console.log('나의 입찰정보', resp.data.data)
             setBidList(resp.data.data)
         }        
     }, [userEmail])   
@@ -66,7 +66,7 @@ const BidList = () => {
         console.log('선택요소', product_id, selectedData.selectedAucId)
         const confirmOK = window.confirm(`${selectedData.selectedAucEmail}님 ${selectedData.selectedAucPrice}으로 낙찰하시겠습니까?`)
         if (confirmOK) {
-            const resp = await axios.post('http://localhost:8000/product/selectbid', {pId: product_id, selectedAucId: selectedData.selectedAucId})
+            const resp = await axios.post('http://localhost:8000/products/selectbid', {pId: product_id, selectedAucId: selectedData.selectedAucId})
             if(resp.data.status === 500) window.alert(resp.data.message)
             else {
                 // 성공시 페이지 리로드 
@@ -81,7 +81,7 @@ const BidList = () => {
     // 페이지 진입 시, useEmail이 변경될 때 실행  
     useEffect(()=>{
         if(userEmail) {
-            console.log('login user:', userEmail)
+            // console.log('login user:', userEmail)
             showInfo()
             showBidd()
         }
@@ -107,8 +107,8 @@ const BidList = () => {
                     <tbody>
                         {data[0] ? (
                             <>
-                            {data.map((item) => (
-                            <tr key={item.product_id}>
+                            {data.map((item, index) => (
+                            <tr key={index}>
                                 <td>
                                     <div className="media">
                                         <div className="media-body">

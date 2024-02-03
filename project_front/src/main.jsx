@@ -1,11 +1,11 @@
-// import React from 'react'
+import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from './UserContext.jsx'
-
 import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./userContext.jsx";
 
 //bootstrap template...........................
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/animate.css";
 import "./assets/css/owl.carousel.min.css";
@@ -17,11 +17,11 @@ import "./assets/css/slick.css";
 import "./assets/css/style.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	// <React.StrictMode>
-	<BrowserRouter>
-		<UserProvider>
-			<App />
-		</UserProvider>
-	</BrowserRouter>
-	// </React.StrictMode>,
+  // <React.StrictMode>
+  <BrowserRouter>
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </BrowserRouter>
+  // </React.StrictMode>,
 );
